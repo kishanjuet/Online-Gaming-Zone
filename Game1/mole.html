@@ -1,0 +1,125 @@
+<html>
+	<head>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<style>
+			
+			.line{
+				background-color:rgb(136,0,21);
+				border-radius:100px 100px 0px 0px;
+				height:1%;
+				width:100%;
+				position:absolute;
+				top:30%;
+				}
+			.mole{
+				background-color:rgb(136,0,21);
+				border-radius:100px 100px 0px 0px;
+				height:100%;
+				width:10%;
+				position:absolute;
+				top:100%;
+				background-image:url(mole.png);
+				background-size:100%;
+				background-repeat:no-repeat;
+				background-position:0% 5%
+				}
+			.left_ear{
+				background-color:rgb(136,0,21);
+				border-radius:100px;
+				position:absolute;
+				float:left;
+				min-width:30%;
+				padding-top:30%;
+				z-index:-1;
+				}
+			.right_ear{
+				background-color:rgb(136,0,21);
+				border-radius:100px;
+				position:absolute;
+				float:left;
+				min-width:30%;
+				padding-top:30%;
+				left:70%;
+				z-index:-1;
+				}
+			#mole1 { left: 10% } 
+			#mole2 { left: 45% } 
+			#mole3 { left: 80% } 
+			
+			.score{ font-family:ariel; font-size:5vw; position:absolute; right:5%;}
+			#test:hover{
+  				cursor: url(download.png) /* the default is your photo*/;
+			}
+		</style>
+		<script>
+
+			jQuery(document).ready(function(){
+
+				add = 0;
+				function game_over(){
+
+					jQuery('.mole').animate({'top':'100%'},300);
+					jQuery('.score').html('GAME OVER');
+					jQuery('.score').append('<div class="try_again">TRY AGAIN</div>');
+					console.log('game over')
+					
+				}
+
+				function start(){
+
+					add = 0;
+					jQuery('.score').html('Score: ' + add);
+					console.log('step 1');
+					jQuery('.mole').animate({'top':'30%' },3000, function(){
+						console.log('step 2');
+					        game_over();
+						jQuery(".try_again").click(function(){
+						start();
+						});
+					});
+				
+				}
+				
+				jQuery('.mole').hover(function(){
+
+					jQuery(this).css('background-image','url(hurt.png)');
+					jQuery(this).stop().animate({'top':'100%'},300, function(){
+						
+						add = add + 1 ;
+						
+						jQuery('.score').html('Score: ' + add);
+						jQuery(this).css('background-image','url(mole.png)');
+						jQuery(this).stop().animate({'top':'30%'},3000)
+					});					
+					
+				});
+			
+				start();
+
+			});
+		
+		</script>
+
+	</head>
+
+	<body>
+		
+		<div class='score'>Score: 0</div> 
+		<div class='line'></div>	
+		<div class='mole' id='mole1'>
+			<div class='left_ear'></div>
+			<div class='right_ear'></div>
+		</div>
+		<div class='mole' id='mole2'>
+			<div class='left_ear'></div>
+			<div class='right_ear'></div>
+		</div>
+		<div class='mole' id='mole3'>
+			<div class='left_ear'></div>
+			<div class='right_ear'></div>
+		</div>
+
+	</body>
+
+</html>
